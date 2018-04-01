@@ -1,0 +1,47 @@
+{
+  "name": "enzyme-page-object",
+  "version": "0.1.0",
+  "description": "A library to help write enzyme tests using the page-object pattern",
+  "main": "dist/index.js",
+  "scripts": {
+    "test": "NODE_ENV=test jest --config jest.config.js --maxWorkers=4",
+    "test:watch": "NODE_ENV=test jest --config jest.config.js --watch",
+    "build:watch": "watch 'npm run build' src",
+    "build": "babel src -d dist --ignore '**/*.test.js'",
+    "prepublish": "npm run build"
+  },
+  "keywords": [
+    "enzyme",
+    "page",
+    "object",
+    "react"
+  ],
+  "repository": {
+    "url": "https://github.com/d3vkit/enzyme-page-object",
+    "type": "git"
+  },
+  "author": "Tom Brooks <tbrooks@totaldiscovery.com>",
+  "license": "MIT",
+  "engines": {
+    "node": ">=6.14.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-jest": "^22.4.3",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "babel-preset-react": "^6.24.1",
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "eslint": "^4.19.1",
+    "jest": "^22.4.3",
+    "lodash": "^4.17.5",
+    "prop-types": "^15.6.1",
+    "react": "^16.3.0",
+    "react-dom": "^16.3.0",
+    "react-test-renderer": "^16.3.0",
+    "watch": "^1.0.2"
+  },
+  "dependencies": {}
+}
