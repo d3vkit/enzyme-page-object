@@ -5,8 +5,8 @@ describe('Page', () => {
   const component = React.createElement('div')
 
   it('can be extended', () => {
-    class NewPage extends Page { }
+    class MyPage extends Page { }
 
-    expect(() => { new NewPage('shallow', component) }).not.toThrow()
+    expect(() => { new MyPage('shallow', component) }).not.toThrow()
   })
 })
