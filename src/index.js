@@ -1,4 +1,10 @@
 import Page from './components/Page'
+import ShallowPage from './components/ShallowPage'
+import MountedPage from './components/MountedPage'
 import setup from './setupTests'
 
-export default Page
+export {
+  Page as default,
+  ShallowPage,
+  MountedPage,
+}
