@@ -1,11 +1,15 @@
 import React from 'react'
+
 import IndexPage, {
   ShallowPage as IndexShallowPage,
-  MountedPage as IndexMountedPage
+  MountedPage as IndexMountedPage,
+  Section as IndexSection,
 } from '../index'
+
 import Page from '../components/Page'
 import ShallowPage from '../components/ShallowPage'
 import MountedPage from '../components/MountedPage'
+import Section from '../components/Section'
 
 describe('index', () => {
   const component = React.createElement('div')
@@ -26,5 +30,11 @@ describe('index', () => {
     const page = new IndexMountedPage(component)
 
     expect(page).toBeInstanceOf(MountedPage)
+  })
+
+  it('exports a Section', () => {
+    const page = new IndexSection({ type: 'shallow', component })
+
+    expect(page).toBeInstanceOf(Section)
   })
 })

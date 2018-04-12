@@ -49,7 +49,7 @@ page.find('a').filter('.my-class').element // returns enzyme element
 ----
 
 
-## Example
+## Examples
 
 Given a file Logo.js:
 
@@ -131,11 +131,69 @@ describe('rendering the logo', () => {
 })
 ```
 
+----
+
+## Sections
+
+A `Section` is part of a page that you may use in multiple places.
+
+It accepts a `Page`, or `type` and `component` to create a `Page`.
+
+It uses the given or created page as `context`.
+
+Given a Section:
+
+```javascript
+import { Section } from 'enzyme-page-object'
+
+class MenuSection extends Section {
+  get dashboard() {
+    // context here is the given or created page
+    return this.context.find('a').filter('dashboard').element
+  }
+}
+```
+
+We can add the section to an existing page:
+
+```javascript
+
+import Page from 'enzyme-page-object'
+import Home from './components/Home' // The page being tested
+
+class HomePage extends Page {
+  get menu() {
+    return new MenuSection({ page: this })
+  }
+}
+
+page = new HomePage('shallow', <Home />)
+
+const dashboard = page.menu.dashboard
+```
+
+Or use the section to generate a new page on the fly:
+
+```javascript
+import Home from './components/Home' // The page being tested
+
+section = new MenuSection({ type: 'shallow', component: <Home /> })
+
+const dashboard = section.dashboard
+```
+
+----
+
 ## Tests
 
 Tests are written with Jest and can be run with:
 
   `npm run test`
+
+## TODO
+
+- Add better documentation
+- Ensure parity to enzyme for shallow / mount
 
 ## License
 
