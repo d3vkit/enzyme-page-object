@@ -115,50 +115,81 @@ describe('#click', () => {
 })
 
 describe('#change', () => {
-  let element = { simulate: jest.fn(() => { }) }
+  describe('when called on a text input', () => {
+    let element = shallow(React.createElement('input', { value: 'Old Value', type: 'text' }))
+    element.simulate = jest.fn(() => { })
 
-  it('calls simulate "change" on the element', () => {
-    const foundElement = new FoundElement(element)
+    it('calls simulate "change" on the element', () => {
+      const foundElement = new FoundElement(element)
 
-    foundElement.change('New Value')
+      foundElement.change('New Value')
 
-    expect(element.simulate).toHaveBeenCalledTimes(1)
+      expect(element.simulate).toHaveBeenCalledTimes(1)
+    })
+
+    it('merges the given options to simulate', () => {
+      const foundElement = new FoundElement(element)
+      const value = 'New Value'
+      const options = { target: { name: 'superman' } }
+      const expectedOptions = {
+        target: { name: 'superman', value }
+      }
+
+      foundElement.change(value, options)
+
+      expect(element.simulate).toHaveBeenCalledWith('change', expectedOptions)
+    })
+
+    it('does not accept target value given in options', () => {
+      const foundElement = new FoundElement(element)
+      const value = 'New Value'
+      const options = { target: { value: 'Old Value' } }
+      const expectedOptions = {
+        target: { value, }
+      }
+
+      foundElement.change(value, options)
+
+      expect(element.simulate).toHaveBeenCalledWith('change', expectedOptions)
+    })
   })
 
-  it('merges the given options to simulate', () => {
-    const foundElement = new FoundElement(element)
-    const value = 'New Value'
-    const options = { target: { name: 'superman' } }
-    const expectedOptions = {
-      target: { name: 'superman', value }
-    }
+  describe('when called on a checkbox', () => {
+    let element = shallow(React.createElement('input', { checked: false, type: 'checkbox' }))
+    element.simulate = jest.fn(() => { })
 
-    foundElement.change(value, options)
+    it('calls simulate "change" on the element', () => {
+      const foundElement = new FoundElement(element)
 
-    expect(element.simulate).toHaveBeenCalledWith('change', expectedOptions)
-  })
+      foundElement.change(true)
 
-  it('does not accept target value given in options', () => {
-    const foundElement = new FoundElement(element)
-    const value = 'New Value'
-    const options = { target: { value: 'Old Value' } }
-    const expectedOptions = {
-      target: { value, }
-    }
+      expect(element.simulate).toHaveBeenCalledTimes(1)
+    })
 
-    foundElement.change(value, options)
+    it('merges the given options to simulate', () => {
+      const foundElement = new FoundElement(element)
+      const value = true
+      const options = { target: { name: 'superman' } }
+      const expectedOptions = {
+        target: { name: 'superman', checked: value }
+      }
 
-    expect(element.simulate).toHaveBeenCalledWith('change', expectedOptions)
-  })
+      foundElement.change(value, options)
 
-  it('sets checked instead of value if element responds to checked', () => {
-    element.checked = true
-    const foundElement = new FoundElement(element)
-    const checked = false
-    const expectedOptions = { target: { checked } }
+      expect(element.simulate).toHaveBeenCalledWith('change', expectedOptions)
+    })
 
-    foundElement.change(checked)
+    it('does not accept target checked given in options', () => {
+      const foundElement = new FoundElement(element)
+      const value = true
+      const options = { target: { checked: false } }
+      const expectedOptions = {
+        target: { checked: value }
+      }
 
-    expect(element.simulate).toHaveBeenCalledWith('change', expectedOptions)
+      foundElement.change(value, options)
+
+      expect(element.simulate).toHaveBeenCalledWith('change', expectedOptions)
+    })
   })
 })
