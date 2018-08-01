@@ -247,9 +247,23 @@ Calls enzyme `simulate('click')`, passing the given options. Returns null.
 Calls enzyme `simulate('change')`. `value` will be merged into options, to result in a call like this:
 
 ```javascript
-// element.change('New Value')
+// textfield.change('New Value')
 
 simulate('change', { target: { value: 'New Value' }})
+
+// textfield.prop('value')
+// => 'New Value'
+```
+
+If the underlying element has a property for `checked` (as a checkbox would), `checked` is set instead:
+
+```javascript
+// checkbox.change(false)
+
+simulate('change', { target: { checked: false }})
+
+// checkbox.prop('checked')
+// => false
 ```
 
 Returns null.

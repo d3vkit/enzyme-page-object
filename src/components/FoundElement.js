@@ -8,11 +8,13 @@ class FoundElement {
   }
 
   change(value, options = {}) {
+    const checkbox = Object.hasOwnProperty.call(this.element, 'checked')
+    const newValue = checkbox ? { checked: value } : { value }
     const mergedOptions = {
       ...options,
       target: {
         ...options.target,
-        value,
+        ...newValue,
       }
     }
 

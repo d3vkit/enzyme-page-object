@@ -115,7 +115,7 @@ describe('#click', () => {
 })
 
 describe('#change', () => {
-  const element = { simulate: jest.fn(() => { }) }
+  let element = { simulate: jest.fn(() => { }) }
 
   it('calls simulate "change" on the element', () => {
     const foundElement = new FoundElement(element)
@@ -147,6 +147,17 @@ describe('#change', () => {
     }
 
     foundElement.change(value, options)
+
+    expect(element.simulate).toHaveBeenCalledWith('change', expectedOptions)
+  })
+
+  it('sets checked instead of value if element responds to checked', () => {
+    element.checked = true
+    const foundElement = new FoundElement(element)
+    const checked = false
+    const expectedOptions = { target: { checked } }
+
+    foundElement.change(checked)
 
     expect(element.simulate).toHaveBeenCalledWith('change', expectedOptions)
   })
