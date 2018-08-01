@@ -7,6 +7,18 @@ class FoundElement {
     this.element.simulate('click', options)
   }
 
+  change(value, options = {}) {
+    const mergedOptions = {
+      ...options,
+      target: {
+        ...options.target,
+        value,
+      }
+    }
+
+    this.element.simulate('change', mergedOptions)
+  }
+
   filter(selector) {
     this.element = this.element.filter(selector)
 

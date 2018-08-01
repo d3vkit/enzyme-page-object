@@ -35,7 +35,7 @@ describe('#find', () => {
 
   it('replaces element with the result of the find', () => {
     const expected = 'You found me!'
-    const element = { find: jest.fn((selector) => expected) }
+    const element = { find: jest.fn(() => expected) }
     const foundElement = new FoundElement(element)
 
     foundElement.find('.my-klass')
@@ -53,7 +53,7 @@ describe('#find', () => {
   })
 })
 
-describe('#find', () => {
+describe('#filter', () => {
   it('calls filter on the element', () => {
     const element = { filter: jest.fn() }
     const foundElement = new FoundElement(element)
@@ -75,7 +75,7 @@ describe('#find', () => {
 
   it('replaces element with the result of the filter', () => {
     const expected = 'You found me!'
-    const element = { filter: jest.fn((selector) => expected) }
+    const element = { filter: jest.fn(() => expected) }
     const foundElement = new FoundElement(element)
 
     foundElement.filter('.my-klass')
@@ -94,7 +94,7 @@ describe('#find', () => {
 })
 
 describe('#click', () => {
-  const element = { simulate: jest.fn((type, options) => {}) }
+  const element = { simulate: jest.fn(() => {}) }
 
   it('calls simulate "click" on the element', () => {
     const foundElement = new FoundElement(element)
@@ -111,5 +111,43 @@ describe('#click', () => {
     foundElement.click(options)
 
     expect(element.simulate).toHaveBeenCalledWith('click', options)
+  })
+})
+
+describe('#change', () => {
+  const element = { simulate: jest.fn(() => { }) }
+
+  it('calls simulate "change" on the element', () => {
+    const foundElement = new FoundElement(element)
+
+    foundElement.change('New Value')
+
+    expect(element.simulate).toHaveBeenCalledTimes(1)
+  })
+
+  it('merges the given options to simulate', () => {
+    const foundElement = new FoundElement(element)
+    const value = 'New Value'
+    const options = { target: { name: 'superman' } }
+    const expectedOptions = {
+      target: { name: 'superman', value }
+    }
+
+    foundElement.change(value, options)
+
+    expect(element.simulate).toHaveBeenCalledWith('change', expectedOptions)
+  })
+
+  it('does not accept target value given in options', () => {
+    const foundElement = new FoundElement(element)
+    const value = 'New Value'
+    const options = { target: { value: 'Old Value' } }
+    const expectedOptions = {
+      target: { value, }
+    }
+
+    foundElement.change(value, options)
+
+    expect(element.simulate).toHaveBeenCalledWith('change', expectedOptions)
   })
 })

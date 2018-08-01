@@ -1,5 +1,5 @@
 Enzyme Page Object
-=========
+=
 
 A library to help write enzyme tests using the page-object pattern
 
@@ -46,11 +46,11 @@ Because this is a work in progress, not all aspects of Enzyme are currently repr
 page.find('a').filter('.my-class').element // returns enzyme element
 ```
 
-----
+---
 
 
-## Examples
-
+Examples
+=
 Given a file Logo.js:
 
 ```javascript
@@ -131,7 +131,7 @@ describe('rendering the logo', () => {
 })
 ```
 
-----
+---
 
 ## Sections
 
@@ -182,19 +182,109 @@ section = new MenuSection({ type: 'shallow', component: <Home /> })
 const dashboard = section.dashboard
 ```
 
+---
+
+API
+=
+
+### Page
+
+---
+
+*constructor(type, component, options = {})*
+
+Returns a `Page` object. Accepts the following arguments:
+
+- Type: One of `mount` or `shallow` (Required)
+- Component: A React component that the `Page` will wrap (Required)
+- Options: an options object
+  - Dive: When shallow rendering, the dive option to pass to enzyme
+
+---
+
+*find(selector)*
+
+Calls enzyme `find()` using the selector given. Returns a `FoundElement`
+
+---
+
+*getElement()*
+
+Calls enzyme `getElement()`
+
+---
+
+### Section
+
+---
+
+*constructor({ page, type, component })*
+
+Returns a `Section` object. Accepts the following arguments:
+
+- Page: a `Page` context to be used for the section. If one is not provided, a new `Page` will be created.
+- Type: If no `Page` is provided, the type of `Page` to generate (shallow or mount)
+- Component: If no `Page` is provided, the React component to wrap the `Page` around
+
+---
+
+### FoundElement
+
+---
+
+*constructor(element)*
+
+Returns `FoundElement` with `element` attached as property.
+
+*click(options)*
+
+Calls enzyme `simulate('click')`, passing the given options. Returns null.
+
+---
+
+*change(value, options = {})*
+
+Calls enzyme `simulate('change')`. `value` will be merged into options, to result in a call like this:
+
+```javascript
+// element.change('New Value')
+
+simulate('change', { target: { value: 'New Value' }})
+```
+
+Returns null.
+
+---
+
+*filter(selector)*
+
+Calls enzyme `filter(selector)`. Returns itself (to allow chaining).
+
+---
+
+*find(selector)*
+
+Calls enzyme `find(selector)`. Returns itself (to allow chaining).
+
+---
+
+*prop(key)*
+
+Calls and returns enzyme `prop(key)`
+
 ----
 
-## Tests
-
+Tests
+=
 Tests are written with Jest and can be run with:
 
   `npm run test`
 
-## TODO
-
+TODO
+=
 - Add better documentation
 - Ensure parity to enzyme for shallow / mount
 
-## License
-
+License
+=
 MIT
