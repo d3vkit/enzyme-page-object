@@ -37,9 +37,13 @@ class FoundElement {
     return this.element.length
   }
 
-  map(callback) {
+  map(callback, wrap = true) {
     return this.element.map(node => {
-      return new FoundElement(callback(node))
+      if (wrap) {
+        return new FoundElement(callback(node))
+      } else {
+        return callback(node)
+      }
     })
   }
 

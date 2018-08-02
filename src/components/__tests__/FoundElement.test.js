@@ -111,16 +111,46 @@ describe('#length', () => {
 })
 
 describe('#map', () => {
-  it('returns array of results wrapped in found elements', () => {
-    const myKlass = <div className="my-klass">My Div</div>
-    const otherKlass = <div className="other-klass">My Div</div>
-    const element = shallow(<div>{myKlass}{otherKlass}</div>)
-    const foundElement = new FoundElement(element)
-    const expected = new FoundElement(shallow(myKlass))
+  describe('when wrap option is not defined', () => {
+    it('returns array of results wrapped in found elements', () => {
+      const myKlass = <div className="my-klass">My Div</div>
+      const otherKlass = <div className="other-klass">My Div</div>
+      const element = shallow(<div>{myKlass}{otherKlass}</div>)
+      const foundElement = new FoundElement(element)
+      const expected = new FoundElement(shallow(myKlass))
 
-    const result = foundElement.map(node => node.find('.my-klass'))
+      const result = foundElement.map(node => node.find('.my-klass'))
 
-    expect(result).toEqual([expected])
+      expect(result).toEqual([expected])
+    })
+  })
+
+  describe('when wrap option is true', () => {
+    it('returns array of results wrapped in found elements', () => {
+      const myKlass = <div className="my-klass">My Div</div>
+      const otherKlass = <div className="other-klass">My Div</div>
+      const element = shallow(<div>{myKlass}{otherKlass}</div>)
+      const foundElement = new FoundElement(element)
+      const expected = new FoundElement(shallow(myKlass))
+
+      const result = foundElement.map((node) => node.find('.my-klass'), true)
+
+      expect(result).toEqual([expected])
+    })
+  })
+
+  describe('when wrap options is false', () => {
+    it('returns array of results not wrapped in found elements', () => {
+      const myKlass = <div className="my-klass">My Div</div>
+      const otherKlass = <div className="other-klass">My Div</div>
+      const element = shallow(<div>{myKlass}{otherKlass}</div>)
+      const foundElement = new FoundElement(element)
+      const expected = shallow(myKlass)
+
+      const result = foundElement.map(node => node.find('.my-klass'), false)
+
+      expect(result).toEqual([expected])
+    })
   })
 })
 
