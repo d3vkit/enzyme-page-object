@@ -284,7 +284,7 @@ Calls enzyme `find(selector)`. Returns itself (to allow chaining).
 
 *map(fn)*
 
-Calls enzyme `map(fn)`. Returns an array directly from enzyme.
+Calls enzyme `map(fn)`, wrapping the results in `FoundElement`. Returns array.
 
 ---
 
