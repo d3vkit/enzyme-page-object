@@ -282,9 +282,9 @@ Calls enzyme `find(selector)`. Returns itself (to allow chaining).
 
 ---
 
-*map(fn)*
+*map(fn, wrap)*
 
-Calls enzyme `map(fn)`, wrapping the results in `FoundElement`. Returns array.
+Calls enzyme `map(fn)`. If wrap is `true`, results are wrapped in `FoundElement`. Else results are returned directly. Returns array.
 
 ---
 
