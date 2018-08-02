@@ -33,8 +33,20 @@ class FoundElement {
     return this
   }
 
+  get length() {
+    return this.element.length
+  }
+
+  map(callback) {
+    return this.element.map(callback)
+  }
+
   prop(key) {
     return this.element.prop(key)
+  }
+
+  props() {
+    return this.element.props()
   }
 }
 
