@@ -66,6 +66,10 @@ class Page {
     return this
   }
 
+  get element() {
+    return new FoundElement(this.component)
+  }
+
   find(selector) {
     const element = this.component.find(selector)
     const foundElement = new FoundElement(element)
