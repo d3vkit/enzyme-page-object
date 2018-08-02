@@ -38,7 +38,9 @@ class FoundElement {
   }
 
   map(callback) {
-    return this.element.map(callback)
+    return this.element.map(node => {
+      return new FoundElement(callback(node))
+    })
   }
 
   prop(key) {

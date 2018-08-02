@@ -111,15 +111,16 @@ describe('#length', () => {
 })
 
 describe('#map', () => {
-  it('returns array of results', () => {
+  it('returns array of results wrapped in found elements', () => {
     const myKlass = <div className="my-klass">My Div</div>
     const otherKlass = <div className="other-klass">My Div</div>
     const element = shallow(<div>{myKlass}{otherKlass}</div>)
     const foundElement = new FoundElement(element)
+    const expected = new FoundElement(shallow(myKlass))
 
     const result = foundElement.map(node => node.find('.my-klass'))
 
-    expect(result).toEqual([shallow(myKlass)])
+    expect(result).toEqual([expected])
   })
 })
 
