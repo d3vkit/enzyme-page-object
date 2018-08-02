@@ -282,11 +282,23 @@ Calls enzyme `find(selector)`. Returns itself (to allow chaining).
 
 ---
 
+*map(fn)*
+
+Calls enzyme `map(fn)`. Returns an array directly from enzyme.
+
+---
+
 *prop(key)*
 
 Calls and returns enzyme `prop(key)`
 
-----
+---
+
+*props()*
+
+Calls and returns enzyme `props()`
+
+---
 
 Tests
 =
