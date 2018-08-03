@@ -21,6 +21,10 @@ class FoundElement {
     this.element.simulate('change', mergedOptions)
   }
 
+  debug() {
+    return this.element.debug()
+  }
+
   filter(selector) {
     this.element = this.element.filter(selector)
 
@@ -31,6 +35,14 @@ class FoundElement {
     this.element = this.element.find(selector)
 
     return this
+  }
+
+  first() {
+    return this.element.first()
+  }
+
+  last() {
+    return this.element.last()
   }
 
   get length() {
@@ -53,6 +65,14 @@ class FoundElement {
 
   props() {
     return this.element.props()
+  }
+
+  text() {
+    return this.element.text()
+  }
+
+  type() {
+    return this.element.type()
   }
 }
 
