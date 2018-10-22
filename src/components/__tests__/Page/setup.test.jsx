@@ -1,5 +1,5 @@
 import React from 'react'
-import enzyme, { shallow, mount } from 'enzyme'
+import { shallow, mount } from 'enzyme'
 
 import Page from '../../Page'
 
@@ -68,49 +68,37 @@ describe('Page.js', () => {
     describe('accepts options', () => {
       describe('when type is shallow', () => {
         const type = 'shallow'
-
-        class RendersDOM extends React.Component {
-          render() {
-            return <div>First Level</div>
-          }
-        }
-
-        class RendersMultiple extends React.Component {
-          render() {
-            return <RendersDOM />
-          }
-        }
-
-        const element = <RendersMultiple />
+        const InnerDOM = () => <div>First Level</div>
+        const OuterDOM = () => <InnerDOM />
 
         describe('when dive is not given', () => {
-          const page = new Page(type, element, {})
+          const page = new Page(type, <OuterDOM />, {})
 
-          const wrapped = shallow(element)
+          const wrapped = shallow(<OuterDOM />)
 
           expect(page.component).toEqual(wrapped)
         })
 
         describe('when dive is null', () => {
-          const page = new Page(type, element, { dive: null })
+          const page = new Page(type, <OuterDOM />, { dive: null })
 
-          const wrapped = shallow(element)
+          const wrapped = shallow(<OuterDOM />)
 
           expect(page.component).toEqual(wrapped)
         })
 
         describe('when dive is 0', () => {
-          const page = new Page(type, element, { dive: 0 })
+          const page = new Page(type, <OuterDOM />, { dive: 0 })
 
-          const wrapped = shallow(element)
+          const wrapped = shallow(<OuterDOM />)
 
           expect(page.component).toEqual(wrapped)
         })
 
         describe('when dive is 1', () => {
-          const page = new Page(type, element, { dive: 1 })
+          const page = new Page(type, <OuterDOM />, { dive: 1 })
 
-          const wrapped = shallow(<RendersDOM />)
+          const wrapped = shallow(<InnerDOM />)
 
           expect(page.component).toEqual(wrapped)
         })
