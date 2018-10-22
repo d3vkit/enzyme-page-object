@@ -5,7 +5,7 @@
   "main": "dist/index.js",
   "scripts": {
     "test": "NODE_ENV=test jest --config jest.config.js --maxWorkers=4",
-    "test:watch": "NODE_ENV=test jest --config jest.config.js --watch",
+    "test:watch": "NODE_ENV=test jest --config jest.config.js --watch --verbose=false",
     "build:watch": "watch 'npm run build' src",
     "build": "babel src -d dist --ignore '**/*.test.js'",
     "prepublish": "npm run build"
