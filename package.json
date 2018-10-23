@@ -1,6 +1,6 @@
 {
   "name": "enzyme-page-object",
-  "version": "0.1.12",
+  "version": "0.1.13",
   "description": "A library to help write enzyme tests using the page-object pattern",
   "main": "dist/index.js",
   "scripts": {
@@ -14,7 +14,9 @@
     "enzyme",
     "page",
     "object",
-    "react"
+    "react",
+    "page-object",
+    "page object"
   ],
   "repository": {
     "url": "https://github.com/d3vkit/enzyme-page-object",

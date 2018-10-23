@@ -1,5 +1,5 @@
 import React from 'react'
-import enzyme, { shallow } from 'enzyme'
+import { shallow } from 'enzyme'
 import FoundElement from '../FoundElement'
 
 describe('FoundElement', () => {
@@ -120,8 +120,8 @@ describe('FoundElement', () => {
     it('returns enzyme debug', () => {
       const wrapper = shallow(<div foo="bar">My Div</div>)
       const foundElement = new FoundElement(wrapper)
-      const expected = wrapper.debug()
 
+      const expected = wrapper.debug()
       const result = foundElement.debug()
 
       expect(result).toEqual(expected)
@@ -234,6 +234,30 @@ describe('FoundElement', () => {
     })
   })
 
+  describe('#instance', () => {
+    class MyInstanceKlass extends React.Component {
+      constructor(props) {
+        super(props)
+
+        this.state = { working: true };
+      }
+
+      render() {
+        return <div />;
+      }
+    }
+
+    it('returns enzyme instance', () => {
+      const wrapper = shallow(<MyInstanceKlass />);
+      const foundElement = new FoundElement(wrapper);
+
+      const expected = wrapper.instance();
+      const result = foundElement.instance();
+
+      expect(result).toEqual(expected);
+    });
+  });
+
   describe('#last', () => {
     it('returns the last enzyme element', () => {
       const element1 = <div className="bar">My Div</div>
@@ -331,6 +355,16 @@ describe('FoundElement', () => {
     })
   })
 
+  describe('#state', () => {
+    it('calls enzyme state()', () => {
+      // TODO: https://trello.com/c/WyUn1AF3/18-mock-enzyme-instead-of-testing-directly
+    })
+
+    it('passes given key to enzyme state', () => {
+      // TODO: https://trello.com/c/WyUn1AF3/18-mock-enzyme-instead-of-testing-directly
+    })
+  })
+
   describe('#text', () => {
     it('returns the text', () => {
       const wrapper = shallow(<div>My Div</div>)
@@ -353,4 +387,10 @@ describe('FoundElement', () => {
       expect(result).toEqual(expected)
     })
   })
+
+  describe('#update', () => {
+    it('calls enzyme update()', () => {
+      // TODO: https://trello.com/c/WyUn1AF3/18-mock-enzyme-instead-of-testing-directly
+    });
+  });
 })
