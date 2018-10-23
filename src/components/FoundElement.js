@@ -41,6 +41,10 @@ class FoundElement {
     return this.element.first()
   }
 
+  instance() {
+    return this.element.instance()
+  }
+
   last() {
     return this.element.last()
   }
@@ -67,12 +71,20 @@ class FoundElement {
     return this.element.props()
   }
 
+  state(key) {
+    return this.element.state(key)
+  }
+
   text() {
     return this.element.text()
   }
 
   type() {
     return this.element.type()
+  }
+
+  update() {
+    this.element.update()
   }
 }
 

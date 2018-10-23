@@ -14,7 +14,6 @@ Yarn:
 
 ```shell
 $ yarn add enzyme-page-object --dev
-```
 
 ## Usage
 
@@ -177,7 +176,8 @@ Or use the section to generate a new page on the fly:
 ```javascript
 import Home from './components/Home' // The page being tested
 
-section = new MenuSection({ type: 'shallow', component: <Home /> })
+// Options (like `dive`) are passed to the Page automatically
+section = new MenuSection({ type: 'shallow', component: <Home />, dive: 1 })
 
 const dashboard = section.dashboard
 ```
@@ -236,6 +236,8 @@ Returns a `Section` object. Accepts the following arguments:
 
 Returns `FoundElement` with `element` attached as property.
 
+---
+
 *click(options)*
 
 Calls enzyme `simulate('click')`, passing the given options. Returns null.
@@ -282,6 +284,12 @@ Calls enzyme `find(selector)`. Returns itself (to allow chaining).
 
 ---
 
+*instance()*
+
+Calls and returns enzyme `instance()`.
+
+---
+
 *map(fn, wrap)*
 
 Calls enzyme `map(fn)`. If wrap is `true`, results are wrapped in `FoundElement`. Else results are returned directly. Returns array.
@@ -300,6 +308,30 @@ Calls and returns enzyme `props()`
 
 ---
 
+*state(key)*
+
+Calls and returns enzyme `state(key)`
+
+---
+
+*text()*
+
+Calls and returns enzyme `text()`
+
+---
+
+*type()*
+
+Calls and returns enzyme `type()`
+
+---
+
+*update()*
+
+Calls enzyme `update()`
+
+---
+
 Tests
 =
 Tests are written with Jest and can be run with:
@@ -308,8 +340,8 @@ Tests are written with Jest and can be run with:
 
 TODO
 =
-- Add better documentation
 - Ensure parity to enzyme for shallow / mount
+- Mock enzyme to stop testing functionality that is not from enzyme-page-object
 
 License
 =
