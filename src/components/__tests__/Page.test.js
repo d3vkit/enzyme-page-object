@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { shallow } from 'enzyme'
 import Page from '../Page'
 import FoundElement from '../FoundElement';
@@ -10,6 +11,45 @@ describe('Page', () => {
     class MyPage extends Page { }
 
     expect(() => { new MyPage('shallow', component) }).not.toThrow()
+  })
+
+  describe('when shallow rendering', () => {
+    it('allows passing context option', () => {
+      const ContextComponent = (_props, context) => {
+        const { name } = context;
+
+        return <div>{name}</div>;
+      }
+
+      ContextComponent.contextTypes = {
+        name: PropTypes.string,
+      }
+
+      const context = { name: 'foo' }
+      const myPage = new Page('shallow', <ContextComponent />, { context })
+
+      expect(myPage.component.text()).toEqual('foo')
+    })
+  })
+
+  describe('when mounting', () => {
+    it('allows passing context option', () => {
+      const ContextComponent = (_props, context) => {
+        const { name } = context;
+
+        return <div>{name}</div>;
+      }
+
+      ContextComponent.contextTypes = {
+        name: PropTypes.string,
+      }
+
+      const context = { name: 'foo' }
+      const myPage = new Page('mount', <ContextComponent />, { context })
+      const result = myPage.component.text()
+
+      expect(result).toEqual('foo')
+    })
   })
 
   describe('#element', () => {

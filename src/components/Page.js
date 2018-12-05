@@ -18,11 +18,14 @@ class Page {
   constructor(type, component, options = {}) {
     this.validate(type, component, options)
 
-    const { dive } = options
+    const { dive, context: enzymeContext } = options
 
     this.type = type
-    this.unsetComponent = component
+    this.originalComponent = component
     this.dive = dive
+    this.options = {
+      context: enzymeContext,
+    }
 
     this.setup()
   }
@@ -48,10 +51,10 @@ class Page {
   setup() {
     switch (this.type) {
       case 'shallow':
-        this.component = shallow(this.unsetComponent)
+        this.component = shallow(this.originalComponent, {...this.options})
         break
       case 'mount':
-        this.component = mount(this.unsetComponent)
+        this.component = mount(this.originalComponent, {...this.options})
         break
       default:
         throw TypeError(`Can not setup without valid type of either \`shallow\` or \`mount\`. \`${this.type}\` given.`)
