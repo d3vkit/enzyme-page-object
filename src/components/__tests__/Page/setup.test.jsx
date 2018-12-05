@@ -29,12 +29,12 @@ describe('Page.js', () => {
 
     describe('sets component for Page', () => {
       describe('when component is a react element', () => {
-        it('sets the unsetComponent to the given component', () => {
+        it('sets the originalComponent to the given component', () => {
           const element = React.createElement('div')
 
           const page = new Page('shallow', element)
 
-          expect(page.unsetComponent).toBe(element)
+          expect(page.originalComponent).toBe(element)
         })
 
         describe('when type is shallow', () => {

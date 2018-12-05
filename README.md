@@ -14,6 +14,7 @@ Yarn:
 
 ```shell
 $ yarn add enzyme-page-object --dev
+```
 
 ## Usage
 
@@ -31,7 +32,7 @@ Available options:
 
 - dive: (number of times to dive into shallow component)
 
-So something like this:
+So, something like this:
 
 ```javascript
 new Page('shallow', <Component props={...props} />, { dive: 2 })
@@ -198,7 +199,8 @@ Returns a `Page` object. Accepts the following arguments:
 - Type: One of `mount` or `shallow` (Required)
 - Component: A React component that the `Page` will wrap (Required)
 - Options: an options object
-  - Dive: When shallow rendering, the dive option to pass to enzyme
+  - `dive`: When shallow rendering, the dive option to pass to enzyme
+  - `context`: The context to pass to a shallow rendered or mounted enzyme object
 
 ---
 
@@ -272,61 +274,65 @@ Returns null.
 
 ---
 
-*filter(selector)*
+*filter(selector) => self*
 
-Calls enzyme `filter(selector)`. Returns itself (to allow chaining).
-
----
-
-*find(selector)*
-
-Calls enzyme `find(selector)`. Returns itself (to allow chaining).
+Calls enzyme `filter(selector)`. Returns `self`.
 
 ---
 
-*instance()*
+*find(selector) => self*
+
+Calls enzyme `find(selector)`. Returns `self`.
+
+---
+
+*instance() => enzyme.instance()*
 
 Calls and returns enzyme `instance()`.
 
 ---
 
-*map(fn, wrap)*
+*map(fn, wrap) => []*
 
-Calls enzyme `map(fn)`. If wrap is `true`, results are wrapped in `FoundElement`. Else results are returned directly. Returns array.
+Calls enzyme `map(fn)`. If wrap is `true`, results are wrapped in `FoundElement`, else results are returned directly. Returns array.
 
 ---
 
-*prop(key)*
+*prop(key) => enzyme.prop(key)*
 
 Calls and returns enzyme `prop(key)`
 
 ---
 
-*props()*
+*props() => enzyme.props()*
 
 Calls and returns enzyme `props()`
 
 ---
 
-*state(key)*
+*setContext() => self*
+
+Calls enzyme `setContext(context)`. Returns `self`.
+
+*state(key) => enzyme.state(key)*
 
 Calls and returns enzyme `state(key)`
 
 ---
 
-*text()*
+*text() => enzyme.text()*
 
 Calls and returns enzyme `text()`
 
 ---
 
-*type()*
+*type() => enzyme.type()*
 
 Calls and returns enzyme `type()`
 
 ---
 
-*update()*
+*update() => enzyme.update()*
 
 Calls enzyme `update()`
 

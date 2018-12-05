@@ -71,6 +71,12 @@ class FoundElement {
     return this.element.props()
   }
 
+  setContext(context) {
+    this.element.setContext(context)
+
+    return this
+  }
+
   state(key) {
     return this.element.state(key)
   }

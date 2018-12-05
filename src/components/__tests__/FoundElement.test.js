@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { shallow } from 'enzyme'
 import FoundElement from '../FoundElement'
 
@@ -352,6 +353,29 @@ describe('FoundElement', () => {
       const result = foundElement.props()
 
       expect(result).toEqual({ children: 'My Div', foo: 'bar' })
+    })
+  })
+
+  describe('#setContext', () => {
+    it('sets the context', () => {
+      const ContextComponent = (_props, context) => {
+        const { name } = context;
+
+        return <div>{name}</div>;
+      }
+
+      ContextComponent.contextTypes = {
+        name: PropTypes.string,
+      }
+
+      const context = { name: 'foo' }
+      const wrapper = shallow(<ContextComponent />, { context })
+      const foundElement = new FoundElement(wrapper)
+
+      foundElement.setContext({ name: 'bar' })
+      const result = foundElement.element.text()
+
+      expect(result).toEqual('bar')
     })
   })
 
