@@ -185,6 +185,10 @@ const dashboard = section.dashboard
 
 ---
 
+More Examples can be found at: https://github.com/d3vkit/enzyme-page-object-examples
+
+---
+
 API
 =
 
