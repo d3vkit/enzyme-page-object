@@ -1,3 +1,7 @@
+I have long since stopped using enzyme, and do not use this package at all. It _probably_ still works, but I don't know that anyone else ever even used it. I am archiving this to make it clearer that it is no longer maintained.
+
+----
+
 Enzyme Page Object
 =
 
